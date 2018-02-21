@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import { LoginUsers, Users } from './data/user';
 let _Users = Users;
-
+var sankeyData=require('./data/product.json')
 export default {
   /**
    * mock bootstrap
@@ -20,6 +20,9 @@ export default {
       msg: 'failure'
     });
 
+    // sankey 图
+    mock.onGet('/sankey').reply(200, sankeyData)
+    
     //登录
     mock.onPost('/login').reply(config => {
       let {username, password} = JSON.parse(config.data);
